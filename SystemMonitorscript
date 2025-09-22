@@ -1,0 +1,36 @@
+#!/bin/bash
+# Linux System Monitoring Script
+# Author: Akshay Chavan
+
+LOG_DIR="./logs"
+LOG_FILE="$LOG_DIR/monitor.log"
+DATE=$(date +"%Y-%m-%d %H:%M:%S")
+
+# Creates an log directory
+mkdir -p $LOG_DIR
+
+echo "----------------------------------" >> $LOG_FILE
+echo "System Health Report - $DATE" >> $LOG_FILE
+echo "----------------------------------" >> $LOG_FILE
+
+# shows Uptime
+echo "[*] Uptime:" >> $LOG_FILE
+uptime >> $LOG_FILE
+
+# tracks CPU Usage
+echo "[*] CPU Load:" >> $LOG_FILE
+top -bn1 | grep "Cpu(s)" >> $LOG_FILE
+
+# tracks Memory Usage
+echo "[*] Memory Usage:" >> $LOG_FILE
+free -h >> $LOG_FILE
+
+# tracks Disk Usage
+echo "[*] Disk Usage:" >> $LOG_FILE
+df -h >> $LOG_FILE
+
+# Top 5 Processes
+echo "[*] Top 5 Processes by Memory:" >> $LOG_FILE
+ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%mem | head -n 6 >> $LOG_FILE
+
+echo "Report saved to $LOG_FILE"

@@ -1,2 +1,3 @@
-# shell-scripts
-Collection of shell scripts and projects
+#shell-scripts
+A simple bash script to monitor system health (CPU, Memory, Disk, Processes, and Uptime) and save reports to log file.
+results are saved in logs/monitor.log
